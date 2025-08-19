@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { api } from "..";
 import { useUserStore, type IUser } from "../../store/UserStore";
+import type { ApiRespone } from "../types";
 
 export default function useAuthApi() {
     const [loading, setloading] = useState(false)
@@ -9,7 +10,7 @@ export default function useAuthApi() {
     async function login(email: string, password: string) {
         setloading(true)
         try {
-            const result = await api.post<{ message: IUser, statusCode: number }>('/auth/login', {
+            const result = await api.post<ApiRespone<IUser>>('/auth/login', {
                 email: email,
                 password: password
             })
@@ -28,7 +29,7 @@ export default function useAuthApi() {
     async function signUp(email:string,password:string,firstName:string,lastName:string) {
         setloading(true)
             try {
-                    const result = await api.post('/auth/signup', {
+                    const result = await api.post<ApiRespone<IUser>>('/auth/signup', {
                         email,
                         password,
                         firstName,
