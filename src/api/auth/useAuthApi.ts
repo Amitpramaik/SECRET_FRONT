@@ -46,9 +46,17 @@ export default function useAuthApi() {
                     setloading(false)
                 }
     }
+
+    function logout() {
+        setUser(undefined),
+        localStorage.clear(),
+        alert("Logged out successfully!");
+    }
+
     return {
         loading,
         login,
+        logout,
         signUp
     }
 }
